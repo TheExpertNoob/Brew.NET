@@ -11,13 +11,13 @@
 
     <Grid>
         <Image Source="pack://application:,,,/NSPack;component/Resources/StartInfo.png"></Image>
-        <Button x:Name="Button_StartNSP" ToolTip="Start building NSP packages" Margin="179,0,0,25" Height="37" Click="Button_StartNSP_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="373">
+        <Button x:Name="Button_StartNSP" ToolTip="Start building NSP packages" Margin="179,0,0,25" Height="37" Click="Button_StartNSP_Click" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="373" Background="#FF1D351D">
             <DockPanel>
                 <material:PackIcon DockPanel.Dock="Left" HorizontalAlignment="Left" Kind="Buffer" Height="30" Width="30"/>
                 <Label DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="15" Foreground="White">Build NSP packages</Label>
             </DockPanel>
         </Button>
-        <Button x:Name="Button_StartNCA" ToolTip="Start building NCA contents" Margin="0,0,193,25" Height="37" Click="Button_StartNCA_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="378">
+        <Button x:Name="Button_StartNCA" ToolTip="Start building NCA contents" Margin="0,0,193,25" Height="37" Click="Button_StartNCA_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="378" Background="#FF1D351D">
             <DockPanel>
                 <material:PackIcon DockPanel.Dock="Left" HorizontalAlignment="Left" Kind="Buffer" Height="30" Width="30"/>
                 <Label DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="15" Foreground="White">Build NCA contents</Label>
@@ -30,13 +30,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Green.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Green.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>

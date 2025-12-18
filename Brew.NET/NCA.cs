@@ -40,6 +40,8 @@ namespace Brew.HacPack
         public NCAType Type { get; set; }
         public string TitleID { get; set; }
         public byte KeyGeneration { get; set; }
+		public string SDKVersion { get; set; }
+        public string RequiredSystemVersion { get; set; }
         public string ExeFS { get; set; }
         public string RomFS { get; set; }
         public string Logo { get; set; }
@@ -59,11 +61,13 @@ namespace Brew.HacPack
             hacpack += " --tempdir \"\"" + Utils.TemporaryDirectory + "\\bin\\temp\"\"";
             hacpack += " -o \"\"" + OutDir + "\"\"";
             hacpack += " --keygeneration " + KeyGeneration.ToString();
+			hacpack += " --sdkversion " + SDKVersion;
             hacpack += " --titleid " + TitleID.ToString();
             switch(Type)
             {
                 case NCAType.CNMT:
                     hacpack += " --ncatype meta";
+					hacpack += " --requiredsystemversion " + RequiredSystemVersion;
                     switch(Options.TitleType)
                     {
                         case CNMTTitleType.AddOn:

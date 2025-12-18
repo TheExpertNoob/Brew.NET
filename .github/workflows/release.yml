@@ -1,0 +1,87 @@
+name: Release Brew.NET
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET Framework Dev Pack
+      shell: pwsh
+      run: |
+        # Install .NET Framework 4.6.1 Developer Pack
+        $installerUrl = "https://go.microsoft.com/fwlink/?linkid=2099470"
+        $installerPath = "$env:TEMP\ndp461-devpack-enu.exe"
+        
+        Write-Host "Downloading .NET Framework 4.6.1 Developer Pack..."
+        Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
+        
+        Write-Host "Installing .NET Framework 4.6.1 Developer Pack..."
+        Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait
+        
+        Write-Host "Installation complete"
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Extract version from tag
+      id: version
+      shell: pwsh
+      run: |
+        $tag = "${{ github.event.release.tag_name }}"
+        $version = $tag -replace '^v', ''
+        echo "VERSION=$version" >> $env:GITHUB_OUTPUT
+        echo "TAG=$tag" >> $env:GITHUB_OUTPUT
+        Write-Host "Version: $version"
+        Write-Host "Tag: $tag"
+
+    - name: Restore dependencies
+      run: msbuild -t:restore -p:Configuration=Release
+
+    - name: Build solution
+      run: msbuild -p:Configuration=Release -p:Platform="Any CPU"
+
+    - name: Create release archives
+      shell: pwsh
+      run: |
+        $version = "${{ steps.version.outputs.VERSION }}"
+        $buildPath = "Output\NSPack"
+        
+        if (-not (Test-Path $buildPath)) {
+          Write-Error "Build output not found at $buildPath"
+          exit 1
+        }
+        
+        Write-Host "Found build output at: $buildPath"
+        Get-ChildItem $buildPath | Select-Object Name, Length
+        
+        # Create main application archive
+        Compress-Archive -Path "$buildPath\*" -DestinationPath "NSPack-v$version-win-x64.zip"
+        
+        # Calculate SHA256 checksums
+        $hash = Get-FileHash "NSPack-v$version-win-x64.zip" -Algorithm SHA256
+        $hash.Hash + "  NSPack-v$version-win-x64.zip" | Out-File -FilePath checksums.txt -Encoding utf8
+
+    - name: Upload assets to release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.version.outputs.TAG }}
+        files: |
+          NSPack-v${{ steps.version.outputs.VERSION }}-win-x64.zip
+          checksums.txt

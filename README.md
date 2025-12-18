@@ -5,19 +5,18 @@ This project contains:
 - Brew.NET, a C# library using hacPack tool (credits to The-4n, great work!) to build NSP packages (yeah, the project and one of the projects inside it have the same name)
 - NSPack, a GUI front-end for the libraries mentioned above, to easily build NSP packages
 
-## **IMPORTANT!** this project is no longer continued.
-
 Credits to:
 
 - The-4n for his awesome work with custom NCA and NSP building
 - Liam for helping me with NACP support
+- XorTroll for setting the baseline code
 
 ## NSPack - simple NSP package and NCA content builder
 
 ### Using the builder
 
 - There are some basic elements you need to provide at least to be able to make a NSP:
-  - Title ID: 16 hex characters (example: 0100CAFE1234BEEF) - any title ID should work.
+  - Title ID: 16 hex characters (example: 0100DEAD1234BEEF) - any title ID should work.
 
   - Name: the title's name, which will be the same for all the languages.
 
@@ -46,6 +45,8 @@ Credits to:
   - Video: Will the title allow recording gameplay?
 
   - User account: Will the title ask for a user account when booting it?
+  
+![Screenshot of program ready to make the Rick Roll video.](VideoPlayer.png)
 
 - Using asset files
 
@@ -55,19 +56,15 @@ Credits to:
 
   - Allow to load NACP files directly
 
-  - Direct conversion from NRO to NSP, or any easy way to create NRO forwarders
-
-  - Conversion from XCI to NSP
-
   - Add updates or add-on content support
+  
+  - Allow signing NCA headers and ACID with self-generated keys.
 
 - IMPORTANT
 
   - Installing and running NSPs can get you banned. Although this NSPs are not titlekey-encrypted (ovbiously), using them can be dangerous.
 
-  - If the NSP doesn't run on your console, it can be for various reasons: used a title ID which is smallet than the NPDM's max title ID, not using a correct key generation...
-
-  - Don't try building titles which ask for a user, because they could fail as generated NSPs don't ask for a user.
+  - If the NSP doesn't run on your console, it can be for various reasons: used a title ID which is smaller than the NPDM's max title ID, not using a correct key generation...
 
   - For the build process the program creates a temporary directory on the same folder as the EXE. Don't try messing up with that folder or deleting it while the NSP making process, because it could crash the program. Anyway, reopening the program should reset the directory.
 

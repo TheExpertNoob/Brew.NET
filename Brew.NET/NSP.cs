@@ -26,6 +26,8 @@ namespace Brew.HacPack
             Directory.CreateDirectory(outdir);
             List<NCAType> types = new List<NCAType>();
             byte keygen = Contents[0].KeyGeneration;
+			string sdkVersion = Contents[0].SDKVersion;
+            string requiredSystemVersion = Contents[0].RequiredSystemVersion;
             foreach(NCA cnt in Contents)
             {
                 if(cnt.TitleID != TitleID) continue;
@@ -35,6 +37,8 @@ namespace Brew.HacPack
             NCA cnmt = new NCA(KeyFile);
             cnmt.TitleID = TitleID;
             cnmt.KeyGeneration = keygen;
+			cnmt.SDKVersion = sdkVersion;
+            cnmt.RequiredSystemVersion = requiredSystemVersion;
             cnmt.Type = NCAType.CNMT;
             cnmt.TitleID = TitleID;
             cnmt.Options.TitleType = CNMTTitleType.Application;
@@ -70,10 +74,11 @@ namespace Brew.HacPack
                 string curnca = ncas[0];
                 File.Move(curnca, outdir + "\\" + Path.GetFileName(curnca));
             }
+			string nspOutDir = Path.GetDirectoryName(outdir);
             string hacpack = "--type nsp";
             hacpack += " -k \"\"" + KeyFile + "\"\"";
             hacpack += " --tempdir \"\"" + Utils.TemporaryDirectory + "\\bin\\temp\"\"";
-            hacpack += " -o \"\"" + outdir + "\"\"";
+            hacpack += " -o \"\"" + nspOutDir + "\"\"";
             hacpack += " --keygeneration " + keygen.ToString();
             hacpack += " --titleid " + TitleID.ToString();
             hacpack += " --ncadir \"\"" + outdir + "\"\"";
@@ -88,7 +93,7 @@ namespace Brew.HacPack
                 Directory.Delete(outdir, true);
                 return;
             }
-            File.Move(outdir + "\\" + TitleID + ".nsp", Out);
+            File.Move(nspOutDir + "\\" + TitleID + ".nsp", Out);
             // Directory.Delete(outdir, true);
         }
     }

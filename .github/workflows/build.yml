@@ -1,0 +1,71 @@
+name: Build Brew.NET
+on:
+  push:
+    paths:
+      - '**.xaml'
+      - '**.cs'
+  workflow_dispatch:
+    inputs:
+      configuration:
+        description: 'Build configuration'
+        required: true
+        default: 'Release'
+        type: choice
+        options:
+          - Release
+          - Debug
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set configuration
+      id: config
+      shell: pwsh
+      run: |
+        $config = "${{ github.event.inputs.configuration }}"
+        if ([string]::IsNullOrEmpty($config)) {
+          $config = "Release"
+        }
+        echo "configuration=$config" >> $env:GITHUB_OUTPUT
+        
+    - name: Setup .NET Framework Dev Pack
+      shell: pwsh
+      run: |
+        # Install .NET Framework 4.6.1 Developer Pack
+        $installerUrl = "https://go.microsoft.com/fwlink/?linkid=2099470"
+        $installerPath = "$env:TEMP\ndp461-devpack-enu.exe"
+        
+        Write-Host "Downloading .NET Framework 4.6.1 Developer Pack..."
+        Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
+        
+        Write-Host "Installing .NET Framework 4.6.1 Developer Pack..."
+        Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait
+        
+        Write-Host "Installation complete"
+        
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: msbuild -t:restore -p:Configuration=${{ steps.config.outputs.configuration }}
+      
+    - name: Build solution
+      run: msbuild -p:Configuration=${{ steps.config.outputs.configuration }} -p:Platform="Any CPU"
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: NSPack-${{ steps.config.outputs.configuration }}
+        path: Output/NSPack/
+        retention-days: 30
