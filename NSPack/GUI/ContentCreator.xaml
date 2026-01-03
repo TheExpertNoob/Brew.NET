@@ -16,7 +16,7 @@
             <Grid>
                 <Label Content="Required for any NCA type" FontSize="14" HorizontalAlignment="Left" Margin="306,10,0,0" VerticalAlignment="Top"/>
                 <Label Content="NCA assets" Foreground="Gray" FontSize="14" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Box_TitleID" Foreground="White" HorizontalAlignment="Left" MaxLength="16" Height="26" Margin="86,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.467,0.522"/>
+                <TextBox x:Name="Box_TitleID" Foreground="White" HorizontalAlignment="Left" MaxLength="16" Height="26" Margin="86,51,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.467,0.522"/>
                 <Label Content="Title ID" HorizontalAlignment="Left" Margin="19,51,0,0" VerticalAlignment="Top" Height="26" Width="47"/>
                 <Label Content="Keygen" HorizontalAlignment="Left" Margin="200,51,0,0" VerticalAlignment="Top" Height="26" Width="90"/>
                 <ComboBox x:Name="Combo_KeyGen" Foreground="White" HorizontalAlignment="Left" SelectedIndex="-1" SelectionChanged="Combo_KeyGen_SelectionChanged" Margin="255,51,0,0" VerticalAlignment="Top" Width="127" Height="26">

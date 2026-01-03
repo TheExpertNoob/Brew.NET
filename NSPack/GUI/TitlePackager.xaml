@@ -22,7 +22,7 @@
                 <Label Content="Author" HorizontalAlignment="Left" Margin="19,128,0,0" VerticalAlignment="Top" Height="26" Width="47"/>
                 <TextBox x:Name="Box_Version" Foreground="White" HorizontalAlignment="Left" MaxLength="15" Height="26" Margin="86,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.467,0.522"/>
                 <Label Content="Version" HorizontalAlignment="Left" Margin="19,154,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.469,0.231" Height="26" Width="49"/>
-                <TextBox x:Name="Box_TitleID" Foreground="White" HorizontalAlignment="Left" MaxLength="16" Height="26" Margin="70,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.467,0.522"/>
+                <TextBox x:Name="Box_TitleID" Foreground="White" HorizontalAlignment="Left" MaxLength="16" Height="26" Margin="70,51,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.467,0.522"/>
                 <Label Content="Title ID" HorizontalAlignment="Left" Margin="19,51,0,0" VerticalAlignment="Top" Height="26" Width="47"/>
                 <Image x:Name="Image_Icon" Margin="377,28,15,25"/>
                 <Label Content="Icon" HorizontalAlignment="Left" Margin="210,159,0,0" VerticalAlignment="Top" Height="26" Width="42"/>
